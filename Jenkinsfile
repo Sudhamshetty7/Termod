@@ -1,23 +1,15 @@
 pipeline {
     agent any
-
-    environment {
-        AWS_DEFAULT_REGION = 'ap-northeast-1'
-        TF_VAR_aws_access_key = credentials('aws-access-key')
-        TF_VAR_aws_secret_key = credentials('aws-secret-key')
-    }
-
-    stages {
+       stages {
         stage('Checkout') {
             steps {
-                sh 'rm -rf instance_terraform_with_docker'
-                checkout scm
+                sh 'rm -rf Termod'
+                sh 'git clone https://github.com/Sudhamshetty7/Termod.git'
             }
         }
         
         stage('Terraform Init') {
             steps {
-                // Initialize Terraform in the directory where your Terraform configuration files are
                 script {
                     sh 'terraform init'
                 }
@@ -26,18 +18,16 @@ pipeline {
         
         stage('Terraform Plan') {
             steps {
-                // Generate and show an execution plan without actually applying it
                 script {
-                    sh 'terraform plan -out=tfplan'
+                    sh 'terraform plan -auto-approve'
                 }
             }
         }
         
         stage('Terraform Apply') {
             steps {
-                // Apply the Terraform execution plan
                 script {
-                    sh 'terraform apply tfplan'
+                    sh 'terraform apply'
                 }
             }
         }    
