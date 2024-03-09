@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 sh 'rm -rf Termod'
-                sh 'git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Sudhamshetty7/Termod.git''
+                sh 'https://github.com/Sudhamshetty7/Termod.git'
             }
         }
         
