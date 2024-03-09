@@ -3,8 +3,7 @@ pipeline {
        stages {
         stage('Checkout') {
             steps {
-                sh 'rm -rf Termod'
-                sh 'https://github.com/Sudhamshetty7/Termod.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Sudhamshetty7/Termod.git'
             }
         }
         
